@@ -1,4 +1,4 @@
-export interface Artworks {
+export interface Artwork {
   artist_display: string;
   artist_id: string;
   artist_titles: string[];

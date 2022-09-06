@@ -1,10 +1,9 @@
-import fetcher from "hooks/fetcher";
+import fetcher from "hooks/common/fetcher";
 import { useState } from "react";
 import useSWR from "swr";
-import { Artworks } from "types/artworks/types";
 
 const BASE_URL = "https://api.artic.edu/api/v1/artworks";
-const FIELDS = [
+const fields = [
   "id",
   "title",
   "artist_display", // artist discription
@@ -29,11 +28,11 @@ const FIELDS = [
 
 const useArtworks = (limit: number, searchQuery?: string) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const LIMIT = limit;
+  const query = "query[match][artwork_type_title]=painting";
   const URL_ARTWORKS = encodeURI(
-    `${BASE_URL}/search?fields=${FIELDS.join(
+    `${BASE_URL}/search?fields=${fields.join(
       ","
-    )}&query[match][artwork_type_title]=painting&page=${currentPage}&limit=${LIMIT}${
+    )}&${query}&page=${currentPage}&limit=${limit}${
       searchQuery ? `&q=${searchQuery}` : ""
     }`
   );

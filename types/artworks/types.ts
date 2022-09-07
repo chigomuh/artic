@@ -31,3 +31,24 @@ export interface Artwork {
   };
   timestamp: string;
 }
+
+export interface OriginalArtworksData {
+  config: {
+    iiif_url: string;
+    website_url: string;
+  };
+  data: Artwork[];
+  info: {
+    license_links: string[];
+    license_text: string;
+    version: string;
+  };
+  pagination: {
+    current_page: number;
+    limit: number;
+    offset: number;
+    total: number;
+    total_pages: number;
+  };
+  perference: unknown;
+}

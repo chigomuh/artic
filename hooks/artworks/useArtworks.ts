@@ -1,6 +1,7 @@
 import fetcher from "hooks/common/fetcher";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import useSWR from "swr";
+import { OriginalArtworksData } from "types/artworks/types";
 
 const BASE_URL = "https://api.artic.edu/api/v1/artworks";
 const fields = [
@@ -26,7 +27,14 @@ const fields = [
   "timestamp",
 ];
 
-const useArtworks = (limit: number, searchQuery?: string) => {
+interface ReturnData {
+  artworksData: OriginalArtworksData;
+  loading: boolean;
+  error: unknown;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+}
+
+const useArtworks = (limit: number, searchQuery?: string): ReturnData => {
   const [currentPage, setCurrentPage] = useState(1);
   const query = "query[match][artwork_type_title]=painting";
   const URL_ARTWORKS = encodeURI(
@@ -38,7 +46,6 @@ const useArtworks = (limit: number, searchQuery?: string) => {
   );
 
   const { data, error } = useSWR(URL_ARTWORKS, fetcher);
-  console.log(error);
 
   return {
     artworksData: data,

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ImageWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.ImageWrapper > span {
+  position: unset !important;
+}
+
+.ImageWrapper > span > img {
+  height: auto !important;
+  position: relative !important;
+}
